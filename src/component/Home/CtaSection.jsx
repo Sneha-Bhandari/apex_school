@@ -14,14 +14,14 @@ export default async function CtaSection() {
   // Parse feature actions
   let actions = [];
   try {
-    if (homeData?.featureActions) {
+    if (homeData?.heroActions) {
       actions =
-        typeof homeData.featureActions === "string"
-          ? JSON.parse(homeData.featureActions)
-          : homeData.featureActions;
+        typeof homeData.heroActions === "string"
+          ? JSON.parse(homeData.heroActions)
+          : homeData.heroActions;
     }
   } catch (e) {
-    console.error("Failed to parse featureActions:", e);
+    console.error("Failed to parse hero Actions:", e);
   }
 
   const title = homeData?.featureTitle || "Our Philosophy";
@@ -30,7 +30,7 @@ export default async function CtaSection() {
   const imageUrl = homeData?.featureImage?.url || "";
 
   return (
-    <section className="relative w-full min-h-[50vh] md:min-h-[55vh] flex items-center justify-center py-16 md:py-24 px-4 overflow-hidden">
+    <section className="relative w-full min-h-[40vh] md:min-h-[65vh] flex items-center justify-center py-16 md:py-24 px-4 overflow-hidden">
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         {imageUrl ? (
@@ -61,7 +61,7 @@ export default async function CtaSection() {
         {/* Main Heading */}
         {subtitle && (
           <div
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight md:leading-tight prose prose-invert max-w-none prose-headings:text-white prose-p:text-white prose-p:mb-0"
+            className="text-4xl font-bold mb-4 md:mb-6 leading-tight md:leading-tight prose prose-invert max-w-none prose-headings:text-white prose-p:text-white prose-p:mb-0"
             dangerouslySetInnerHTML={{ __html: subtitle }}
           />
         )}
@@ -69,7 +69,7 @@ export default async function CtaSection() {
         {/* Description */}
         {description && (
           <div
-            className="text-white/80 text-sm md:text-base lg:text-lg leading-relaxed mb-8 md:mb-10 max-w-4xl mx-auto prose prose-invert prose-p:mb-3 md:prose-p:mb-4 prose-p:last:mb-0"
+            className="text-white/80 text-sm leading-relaxed mb-8 md:mb-10 max-w-4xl mx-auto prose prose-invert prose-p:mb-3 md:prose-p:mb-4 prose-p:last:mb-0"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}

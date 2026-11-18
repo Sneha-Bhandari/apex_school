@@ -18,7 +18,7 @@ export default async function PhilosophySection() {
   const featureTitle = data?.featureTitle || "";
   const featureSubtitle = data?.featureSubtitle || "";
   const featureDescription = data?.featureDescription || "";
-  const featureActions = data?.featureActions ? JSON.parse(data.featureActions) : [];
+  const heroActions = data?.heroActions ? JSON.parse(data.heroActions) : [];
   const featureImage = data?.featureImage?.url || null;
 
   return (
@@ -44,7 +44,7 @@ export default async function PhilosophySection() {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4">
-            {featureActions.map((action, index) => (
+            {heroActions.map((action, index) => (
               <Link
                 key={index}
                 href={action.link}

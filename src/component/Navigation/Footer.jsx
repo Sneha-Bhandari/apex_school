@@ -333,7 +333,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about-us" className="hover:text-[#ffd659] transition-colors">
+                  <Link href="/about" className="hover:text-[#ffd659] transition-colors">
                     About Us
                   </Link>
                 </li>
