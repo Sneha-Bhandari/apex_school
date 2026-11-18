@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiMenu, FiX } from "react-icons/fi"; 
+import { usePathname } from "next/navigation";
+import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
-    { name: "Home", href: "/", active: true },
+    { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "Events", href: "/events" },
     { name: "Blog", href: "/blog" },
@@ -20,6 +22,12 @@ export default function Navbar() {
     { name: "Contact Us", href: "/contact" },
   ];
 
+  // Active if exact match, OR (for non-home links) pathname starts with the link
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-11/12 mx-auto py-2 flex justify-between items-center">
@@ -27,7 +35,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image 
-            src="/apex-logo.png" 
+            src="/logo.png" 
             alt="Apex School Logo" 
             width={80} 
             height={80} 
@@ -35,21 +43,26 @@ export default function Navbar() {
           />
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-[16px] font-medium text-gray-800">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <Link
-                href={link.href}
-                className={`transition-colors hover:text-red-500 ${
-                  link.active ? "text-red-500" : ""
-                }`}
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex items-center gap-6 xl:gap-7 text-[15px] font-medium text-gray-800">
+          {navLinks.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  className={`transition-colors hover:text-secondary ${
+                    active ? "text-secondary" : ""
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
+        {/* Mobile Toggle */}
         <button 
           className="lg:hidden text-gray-800 focus:outline-none" 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -59,22 +72,26 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 absolute top-full left-0 w-full shadow-lg">
           <ul className="flex flex-col px-6 py-4 space-y-4 text-[16px] font-medium text-gray-800">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)} 
-                  className={`block w-full transition-colors hover:text-red-500 ${
-                    link.active ? "text-red-500" : ""
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)} 
+                    className={`block w-full transition-colors hover:text-secondary ${
+                      active ? "text-secondary" : ""
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

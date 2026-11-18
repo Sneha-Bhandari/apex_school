@@ -12,7 +12,7 @@
 @theme {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --color-yellow: var(--color-yellow);
+  --color-yellow: var(--yellow);
   --color-footer: var(--footer);
 }
 

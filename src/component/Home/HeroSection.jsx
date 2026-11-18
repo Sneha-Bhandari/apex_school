@@ -1,103 +1,77 @@
-// import Link from "next/link";
-// import Image from "next/image";
-// import { apiGet } from "@/lib/api";
+import Link from "next/link";
+import Image from "next/image";
+import { apiGet } from "@/lib/api"; 
 
-// export default async function HeroSection() {
-//   let hero = null;
+export default async function HeroSection() {
+  let data;
 
-//   try {
-//     const data = await apiGet("/hero-section");
+  try {
+    data = await apiGet("/home-page");
+  } catch (error) {
+    return (
+      <section className="relative h-[85vh] w-full bg-gray-900 flex items-center justify-center">
+        <p className="text-white text-lg">Unable to load hero section.</p>
+      </section>
+    );
+  }
 
-//     if (data && data.length > 0) {
-//       hero = data[0];
-//     }
-//   } catch (error) {
-//     console.error("Failed to fetch hero section:", error);
-//   }
+  const heroTitle = data?.heroTitle || "";
+  const heroDescription = data?.heroDescription || "";
+  const heroActions = data?.heroActions ? JSON.parse(data.heroActions) : [];
+  const heroVideo = data?.heroVideo?.url || null;
+  const heroImage = data?.heroImage?.url || null;
 
-//   // Error or no data
-//   if (!hero) {
-//     return (
-//       <section className="flex min-h-[calc(100vh-5rem)] w-full items-center justify-center bg-gray-100">
-//         <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-primary" />
-//       </section>
-//     );
-//   }
+  return (
+    <section className="relative h-[85vh] w-full overflow-hidden">
+      {heroVideo ? (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none" 
+          poster={heroImage || ""} 
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={heroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      ) : heroImage ? (
+        <Image
+          src={heroImage}
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover"
+        />
+      ) : null}
 
-//   return (
-//     <section className="relative flex min-h-[calc(100vh-5rem)] w-full items-center overflow-hidden">
+      <div className="absolute inset-0 bg-black/50"></div>
 
-//       {/* Background image */}
-//       {hero.image?.imageUrl && (
-//         <Image
-//           src={hero.image.imageUrl}
-//           alt={hero.title || "Hero image"}
-//           fill
-//           priority
-//           unoptimized
-//           className="object-cover object-center"
-//         />
-//       )}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 md:px-8 max-w-5xl mx-auto">
+        
+        <div
+          className="text-white text-3xl sm:text-4xl md:text-6xl  font-semibold leading-[1.15] md:leading-tight mb-6"
+          dangerouslySetInnerHTML={{ __html: heroTitle }}
+        />
 
-//       {/* Overlay */}
-//       <div className="absolute inset-0 bg-linear-to-r from-black/55 to-black/20" />
+        <div
+          className="text-white text-sm  leading-[1.6] md:leading-[1.8] mb-10 max-w-11/12 mx-auto font-normal"
+          dangerouslySetInnerHTML={{ __html: heroDescription }}
+        />
 
-//       {/* Content */}
-//       <div className="relative mx-auto w-11/12 py-16">
-//         <div className="max-w-2xl">
-
-//           {/* Title */}
-//           {hero.title && (
-//             <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white lg:text-6xl">
-//               {hero.title}
-//             </h1>
-//           )}
-
-//           {/* Subtitle */}
-//           {hero.subTitle && (
-//             <h2 className="mt-3 text-4xl font-semibold text-secondary">
-//               {hero.subTitle}
-//             </h2>
-//           )}
-
-//           {/* Description */}
-//           {hero.description && (
-//             <div
-//               className="prose prose-invert mt-5 max-w-xl text-base leading-relaxed text-white"
-//               dangerouslySetInnerHTML={{
-//                 __html: hero.description,
-//               }}
-//             />
-//           )}
-
-//           {/* Buttons */}
-//           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-//             <Link
-//               href="/tours"
-//               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-teal-900/30 transition hover:bg-teal-700"
-//             >
-//               Book a Ride
-//               <span aria-hidden>→</span>
-//             </Link>
-
-//             <Link
-//               href="/fleet"
-//               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
-//             >
-//               View Our Fleet
-//             </Link>
-//           </div>
-
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-export default function HeroSection(){
-return(
-  <div>
-    hero section
-  </div>
-)
+        <div className="flex flex-wrap gap-4 justify-center">
+          {heroActions.map((action, index) => (
+            <Link
+              key={index}
+              href={action.link}
+              className="px-8 py-2.5 rounded-full border border-white text-white font-medium text-sm hover:bg-primary hover:text-white transition-all duration-500 ease-in-out"
+            >
+              {action.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
