@@ -132,10 +132,10 @@ const AchievementGallery = ({ achievements = [] }) => {
                       {item.title}
                     </h3>
 
-                    <p
+                    <div
                       className="text-gray-600 text-[14px] text-justify leading-relaxed line-clamp-3 mb-6"
                       dangerouslySetInnerHTML={{
-                        __html: item.description,
+                        __html: item.description || "",
                       }}
                     />
 
@@ -230,7 +230,7 @@ const AchievementGallery = ({ achievements = [] }) => {
                   <div
                     className="text-gray-600 text-[15px] sm:text-base leading-8 whitespace-pre-line mb-8 text-justify"
                     dangerouslySetInnerHTML={{
-                      __html: selectedAchievement.description,
+                      __html: selectedAchievement.description || "",
                     }}
                   />
 
