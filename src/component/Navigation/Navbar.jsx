@@ -30,16 +30,16 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="w-11/12 mx-auto py-2 flex justify-between items-center">
-        
+      <div className="w-11/12 mx-auto py-1 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="shrink-0">
-          <Image 
-            src="/logo.png" 
-            alt="Apex School Logo" 
-            width={80} 
-            height={80} 
-            className="object-contain"
+        <Link href="/" className="shrink-0 block">
+          <Image
+            src="/logo.png"
+            alt="Apex School Logo"
+            width={120}
+            height={40}
+            className="w-auto h-16 object-contain"
+            priority
           />
         </Link>
 
@@ -63,8 +63,8 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile Toggle */}
-        <button 
-          className="lg:hidden text-gray-800 focus:outline-none" 
+        <button
+          className="lg:hidden text-gray-800 focus:outline-none cursor-pointer"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle Menu"
         >
@@ -82,7 +82,7 @@ export default function Navbar() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)} 
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className={`block w-full transition-colors hover:text-secondary ${
                       active ? "text-secondary" : ""
                     }`}

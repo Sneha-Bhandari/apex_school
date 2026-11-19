@@ -63,7 +63,7 @@ export default async function ClubsPage() {
       </div>
 
       {/* Clubs Grid */}
-      <div className="py-16 bg-white">
+      <div className="py-16 bg-gray-50">
         <div className="w-11/12 mx-auto">
           {clubs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

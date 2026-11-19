@@ -44,7 +44,7 @@ export default async function BlogPage() {
     "https://backend.apexschoolrupendehi.com/api/upload/images/get-image/gdfg-yibh4-DAq8-.jpeg";
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-gray-50 min-h-screen">
       {/* Dynamic Banner */}
       <div className="relative bg-gray-900 text-white h-[55vh] flex items-center justify-center">
         {/* Background Image */}

@@ -370,8 +370,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/resources" className="hover:text-[#ffd659] transition-colors">
-                    Resources
+                  <Link href="/clubs" className="hover:text-[#ffd659] transition-colors">
+                    Club
                   </Link>
                 </li>
                 <li>
