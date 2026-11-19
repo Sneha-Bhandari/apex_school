@@ -60,7 +60,7 @@ const Team = async () => {
   if (!teamMembers.length) return null;
 
   return (
-    <section className="relative overflow-hidden bg-[#f8f9fc] py-10 md:py-10">
+    <section className="relative overflow-hidden bg-[#f8f9fc] py-10 md:py-10 px-10">
       <div className="relative mx-auto w-11/12">
         <div className="mx-auto mb-16 max-w-3xl text-center">
           <span className="inline-block rounded-full bg-red-50 px-5 py-2 text-sm tracking-wide text-[#f04450]">
