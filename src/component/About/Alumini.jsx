@@ -39,7 +39,7 @@ const Alumini = async () => {
 
   return (
     <section className="w-full bg-[#f8f9fb] py-16 md:py-20 overflow-hidden">
-      <div className="max-w-11/12 mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="max-w-11/12 mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">

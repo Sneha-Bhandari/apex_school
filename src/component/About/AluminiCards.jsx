@@ -50,7 +50,7 @@ const AlumniCard = ({ alumni, onReadMore }) => {
 
             {/* Short Description */}
             <div className="grow">
-                <p className="text-[#475569] text-sm leading-6 line-clamp-8 text-justify">
+                <p className="text-[#475569] text-sm leading-6 line-clamp-5 text-justify">
                     {alumni.description?.replace(/^["']|["']$/g, "")}
                 </p>
             </div>
@@ -167,9 +167,10 @@ const AlumniPopup = ({ alumni, onClose }) => {
                         </h3>
                     </div>
 
-                    <div className="text-gray-600 text-[15px] sm:text-base leading-8 whitespace-pre-line wrap-break-words">
-                        {description}
-                    </div>
+                    <div className="text-gray-600 text-[15px] sm:text-base leading-8 text-justify whitespace-pre-line wrap-break-words"
+                    dangerouslySetInnerHTML={{__html: description}}/>
+                       
+                   
 
                   
                 </div>

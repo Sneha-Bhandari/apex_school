@@ -228,7 +228,7 @@ const AchievementGallery = ({ achievements = [] }) => {
 
                   {/* Description */}
                   <div
-                    className="text-gray-600 text-[15px] sm:text-base leading-8 whitespace-pre-line mb-8"
+                    className="text-gray-600 text-[15px] sm:text-base leading-8 whitespace-pre-line mb-8 text-justify"
                     dangerouslySetInnerHTML={{
                       __html: selectedAchievement.description,
                     }}
